@@ -2,6 +2,8 @@
    sentence(sentence(SIMPLE_SENTENCE)) -->  simple_s(SIMPLE_SENTENCE).
    sentence(sentence(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> simple_s(SIMPLE_SENTENCE),conj(CONJ),sentence(SENTENCE).
    simple_s(simple_s(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
+   simple_s(simple_s(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
+   simple_s(simple_s(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
    /* Simplest case if we have one np and one vp. The other cases should handle NP, RELATIVE CLAUSE, VP, AND PREPOSITION_CLAUSE IN DIFFERENT ORDERS, WITH ANDS BETWEEN NOUN AND VERB PHRASES*/
    a(a(ADJ1)) --> adjective(ADJ1).
    a(a(ADJ2,AP)) --> adjective(ADJ2), a(AP).
