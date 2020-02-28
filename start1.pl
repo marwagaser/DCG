@@ -1,34 +1,42 @@
-   %start_sentences 
+   %start_sentences
    sentence(sentence(SIMPLE_SENTENCE)) -->  simple_s(SIMPLE_SENTENCE).
    sentence(sentence(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> simple_s(SIMPLE_SENTENCE),conj(CONJ),sentence(SENTENCE).
-   simple_s(simple_s(NP,VP)) -->  np(NP),vp(VP).
+   simple_s(simple_s(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
    /* Simplest case if we have one np and one vp. The other cases should handle NP, RELATIVE CLAUSE, VP, AND PREPOSITION_CLAUSE IN DIFFERENT ORDERS, WITH ANDS BETWEEN NOUN AND VERB PHRASES*/
-   %adjectives_phrases
-   a(a(ADJ,AP)) --> adj(ADJ), a(AP).
-   a(a(ADJ)) --> adj(ADJ).  
-   %adverb_phrases
+   a(a(ADJ1)) --> adjective(ADJ1).
+   a(a(ADJ2,AP)) --> adjective(ADJ2), a(AP).
+   adjective(adjective(ADJ3)) --> adj(ADJ3).
+   %adverb_phrasessen
    adverb_phrase(adverb_phrase(ADVERB)) --> single_adverb(ADVERB).
-   adverb_phrase(adverb_phrase(ADVERB,ADVERB_PHRASE)) --> single_adverb(ADVERB), adverb(ADVERB_PHRASE).
-   single_adverb(single_adverb(SINGLE_ADVERB)) -->adv(SINGLE_ADVERB).
+   adverb_phrase(adverb_phrase(ADVERB1,ADVERB_PHRASE)) --> single_adverb(ADVERB1), adverb_phrase(ADVERB_PHRASE).
+   single_adverb(single_adverb(SINGLE_ADVERB)) --> adv(SINGLE_ADVERB).
    %noun_phrases
+   noun_phrase(noun_phrase(NOUN_PHRASE)) --> noun_phrase_prep(NOUN_PHRASE).
+   noun_phrase(noun_phrase(NOUN_PHRASE,CONJ,NOUN_PHRASE_NP)) --> noun_phrase_prep(NOUN_PHRASE), conj(CONJ),noun_phrase(NOUN_PHRASE_NP).
+   noun_phrase_prep(noun_phrase_prep(NOUN_PHRASE_WITHOUT_PREP)) -->  np(NOUN_PHRASE_WITHOUT_PREP).
+   noun_phrase_prep(noun_phrase_prep(NOUN_PHRASE_PREP, PREPOSITIONAL_CLAUSE)) -->  np(NOUN_PHRASE_PREP), prep_clause(PREPOSITIONAL_CLAUSE).
    np(np(DET,N))  -->  det(DET),n(N).
    np(np(DET,AP,N))  -->  det(DET),a(AP),n(N).
    np(np(AP,N))  --> a(AP),n(N).
    np(np(N))  -->  n(N).
    %verb_phrases
-   vp(vp(V,NP))  -->  v(V),np(NP).
+   verb_phrase(verb_phrase(VERB_PHRASE)) --> verb_phrase_prep(VERB_PHRASE).
+   verb_phrase(verb_phrase(VERB_PHRASE,CONJ,VERB_PHRASE_NP)) --> verb_phrase_prep(VERB_PHRASE), conj(CONJ),verb_phrase(VERB_PHRASE_NP).
+   verb_phrase_prep(verb_phrase_prep(VERB_PHRASE)) -->  vp(VERB_PHRASE).
+   verb_phrase_prep(verb_phrase_prep(VERB_PHRASE, PREPOSITIONAL_CLAUSE)) -->  vp(VERB_PHRASE), prep_clause(PREPOSITIONAL_CLAUSE).
+   vp(vp(V,NP))  -->  v(V),noun_phrase(NP).
    vp(vp(V))  -->  v(V).
-   vp(vp(ADV,V,NP))  --> adv(ADV),v(V),np(NP).
-   vp(vp(ADV,V))  --> adv(ADV),v(V).
+   vp(vp(ADV,V,NP))  --> adverb_phrase(ADV),v(V),noun_phrase(NP).
+   vp(vp(ADV,V))  --> adverb_phrase(ADV),v(V).
    %preposition_phrases
    prep_clause(prep_clause(PREP_PHRASE)) --> prep_phrase(PREP_PHRASE).
    prep_clause(prep_clause(PREP_PHRASE,PREP_CLAUSE)) --> prep_phrase(PREP_PHRASE),prep_clause(PREP_CLAUSE).
-   prep_phrase(prep_phrase(PREPOSITION,NP)) --> prep(PREPOSITION),np(NP).
+   prep_phrase(prep_phrase(PREPOSITION,NP)) --> prep(PREPOSITION),noun_phrase(NP).
    %relative_clases
-   relative_clause(relative_clause(RELATIVE_PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN),vp(VP),prep_clause(PREP_CLAUSE).
-   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),vp(VP),prep_clause(PREP_CLAUSE).
-   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),vp(VP).
-   relative_clause(relative_clause(RELATIVE_PRONOUN,VP)) --> rp(RELATIVE_PRONOUN),vp(VP).
+   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),verb_phrase(VP),prep_clause(PREP_CLAUSE).
+   relative_clause(relative_clause(RELATIVE_PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP),prep_clause(PREP_CLAUSE).
+   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),verb_phrase(VP).
+   relative_clause(relative_clause(RELATIVE_PRONOUN,VP)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP).
   %determinants
    det(det(the))  -->  [the].
    det(det(a))  -->  [a].
