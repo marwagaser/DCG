@@ -1,8 +1,8 @@
-   s(s(SIMPLE_SENTENCE)) -->  simple_s(SIMPLE_SENTENCE).
-   s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> simple_s(SIMPLE_SENTENCE),conj(CONJ),s(SENTENCE).
-   simple_s(simple_s(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
-   simple_s(simple_s(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
-   simple_s(simple_s(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
+   s(s(SIMPLE_SENTENCE)) -->  sentence(SIMPLE_SENTENCE).
+   s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> sentence(SIMPLE_SENTENCE),conj(CONJ),s(SENTENCE).
+   sentence(sentence(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
+   sentence(sentence(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
+   sentence(sentence(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
    /* Simplest case if we have one np and one vp. The other cases should handle NP, RELATIVE CLAUSE, VP, AND PREPOSITION_CLAUSE IN DIFFERENT ORDERS, WITH ANDS BETWEEN NOUN AND VERB PHRASES*/
    a(a(ADJ1)) --> adjective(ADJ1).
    a(a(ADJ2,AP)) --> adjective(ADJ2), a(AP).
@@ -41,7 +41,7 @@
    relative_clause(relative_clause(RELATIVE_PRONOUN,VP)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP).
   %determinants
    det(det(the))  -->  [the].
-   det(det(her)) --> [her].
+   det(det(other)) --> [other].
    det(det(a))  -->  [a].
    det(det(an))  -->  [an].
    det(det(some)) --> [some].
@@ -147,6 +147,7 @@
    prep(prep(during)) --> [during].
    prep(prep(by)) --> [by].
    prep(prep(with)) --> [with].
+   prep(prep(to)) --> [to].
    %conjunctions
    conj(conj(and))  -->  [and].
    conj(conj(while))  -->  [while].
