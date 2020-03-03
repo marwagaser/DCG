@@ -1,6 +1,5 @@
-   %start_sentences
-   sentence(sentence(SIMPLE_SENTENCE)) -->  simple_s(SIMPLE_SENTENCE).
-   sentence(sentence(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> simple_s(SIMPLE_SENTENCE),conj(CONJ),sentence(SENTENCE).
+   s(s(SIMPLE_SENTENCE)) -->  simple_s(SIMPLE_SENTENCE).
+   s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> simple_s(SIMPLE_SENTENCE),conj(CONJ),s(SENTENCE).
    simple_s(simple_s(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
    simple_s(simple_s(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
    simple_s(simple_s(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
@@ -8,7 +7,7 @@
    a(a(ADJ1)) --> adjective(ADJ1).
    a(a(ADJ2,AP)) --> adjective(ADJ2), a(AP).
    adjective(adjective(ADJ3)) --> adj(ADJ3).
-   %adverb_phrasessen
+   %adverb_phrases
    adverb_phrase(adverb_phrase(ADVERB)) --> single_adverb(ADVERB).
    adverb_phrase(adverb_phrase(ADVERB1,ADVERB_PHRASE)) --> single_adverb(ADVERB1), adverb_phrase(ADVERB_PHRASE).
    single_adverb(single_adverb(SINGLE_ADVERB)) --> adv(SINGLE_ADVERB).
@@ -21,6 +20,7 @@
    np(np(DET,AP,N))  -->  det(DET),a(AP),n(N).
    np(np(AP,N))  --> a(AP),n(N).
    np(np(N))  -->  n(N).
+   np(np(PRONOUN)) --> p(PRONOUN).
    %verb_phrases
    verb_phrase(verb_phrase(VERB_PHRASE)) --> verb_phrase_prep(VERB_PHRASE).
    verb_phrase(verb_phrase(VERB_PHRASE,CONJ,VERB_PHRASE_NP)) --> verb_phrase_prep(VERB_PHRASE), conj(CONJ),verb_phrase(VERB_PHRASE_NP).
@@ -41,8 +41,18 @@
    relative_clause(relative_clause(RELATIVE_PRONOUN,VP)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP).
   %determinants
    det(det(the))  -->  [the].
+   det(det(her)) --> [her].
    det(det(a))  -->  [a].
-   %nouns
+   det(det(an))  -->  [an].
+   det(det(some)) --> [some].
+   det(det(this)) --> [this].
+   det(det(many)) --> [many].
+   det(det(every)) --> [every].
+   det(det(that)) --> [that].
+   det(det(these)) --> [these].
+   det(det(those)) --> [those].
+
+   %nouns_20_nouns
    n(n(boy))  -->  [boy].
    n(n(man))-->  [man].
    n(n(box))-->  [box].
@@ -55,12 +65,19 @@
    n(n(tree))-->  [tree].
    n(n(girl))-->  [girl].
    n(n(students))-->  [students].
+   n(n(student))-->  [student].
    n(n(professors))-->  [professors].
    n(n(lecturers))-->  [lecturers].
    n(n(scientists))-->  [scientists].
    n(n(researchers))-->  [researchers].
+   n(n(photo))-->  [photo].
+   n(n(wall))-->  [wall].
+   n(n(park))-->  [park].
+   n(n(friends))-->  [friends].
+   n(n(football))-->  [football].
    %pronouns
    p(p(they)) --> [they].
+   p(p(he)) --> [he].
    %relative_pronouns
    rp(rp(who)) --> [who].
    rp(rp(whom)) --> [whom].
@@ -74,6 +91,19 @@
    v(v(admired))  -->  [admired].
    v(v(appreciated))  -->  [appreciated].
    v(v(climbed))  -->  [climbed].
+   v(v(went)) --> [went].
+   v(v(studied))  -->  [studied].
+   v(v(solved))  -->  [solved].
+   v(v(wrote))  -->  [wrote].
+   v(v(played))  -->  [played].
+   v(v(was))  -->  [was].
+   v(v(is))  -->  [is].
+   v(v(danced))  -->  [danced].
+   v(v(drank))  -->  [drank].
+   v(v(ate))  -->  [ate].
+   v(v(traveled))  -->  [traveled].
+   v(v(slept))  -->  [slept].
+   v(v(are)) --> [are].
    %adjectives
    adj(adj(large)) --> [large].
    adj(adj(old)) --> [old].
@@ -82,20 +112,41 @@
    adj(adj(empty)) --> [empty].
    adj(adj(white)) --> [white].
    adj(adj(poor)) --> [poor].
-   adj(adj(some)) --> [some].
-   adj(adj(every)) --> [every].
    adj(adj(brilliant)) --> [brilliant].
-   adj(adj(many)) --> [many].
    adj(adj(talented)) --> [talented].
    adj(adj(bright)) --> [bright].
+   adj(adj(colorful)) --> [colorful].
+   adj(adj(brave)) --> [brave].
+   adj(adj(short)) --> [short].
+   adj(adj(tall)) --> [tall].
+   adj(adj(skinny)) --> [skinny].
+   adj(adj(ugly)) --> [ugly].
+   adj(adj(beautiful)) --> [beautiful].
+   adj(adj(fancy)) --> [fancy].
+   adj(adj(cool)) --> [cool].
+   adj(adj(good)) --> [good].
    %adverbs
    adv(adv(quickly)) --> [quickly].
    adv(adv(secretly)) --> [secretly].
+   adv(adv(carefully)) --> [carefully].
+   adv(adv(cheerfully)) --> [cheerfully].
+   adv(adv(beautifully)) --> [beautifully].
+   adv(adv(smartly)) --> [smartly].
+   adv(adv(quietly)) --> [quietly].
+   adv(adv(sadly)) --> [sadly].
+   adv(adv(lazily)) --> [lazily].
+   adv(adv(gracefully)) --> [gracefully].
    %prepositions
    prep(prep(in)) --> [in].
    prep(prep(for)) --> [for].
    prep(prep(after)) --> [after].
    prep(prep(behind)) --> [behind].
+   prep(prep(on)) --> [on].
+   prep(prep(before)) --> [before].
+   prep(prep(beside)) --> [beside].
+   prep(prep(during)) --> [during].
+   prep(prep(by)) --> [by].
+   prep(prep(with)) --> [with].
    %conjunctions
    conj(conj(and))  -->  [and].
    conj(conj(while))  -->  [while].
