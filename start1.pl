@@ -97,13 +97,12 @@
    v(v(wrote))  -->  [wrote].
    v(v(played))  -->  [played].
    v(v(was))  -->  [was].
-   v(v(is))  -->  [is].
    v(v(danced))  -->  [danced].
    v(v(drank))  -->  [drank].
    v(v(ate))  -->  [ate].
    v(v(traveled))  -->  [traveled].
    v(v(slept))  -->  [slept].
-   v(v(are)) --> [are].
+   v(v(were)) --> [were].
    %adjectives
    adj(adj(large)) --> [large].
    adj(adj(old)) --> [old].
