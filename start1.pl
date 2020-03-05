@@ -2,8 +2,6 @@
    s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> sentence(SIMPLE_SENTENCE),conj(CONJ),s(SENTENCE).
    s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> sentence(SIMPLE_SENTENCE),conj2(CONJ),s(SENTENCE).
    sentence(sentence(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
-   sentence(sentence(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
-   sentence(sentence(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
    /* Simplest case if we have one np and one vp. The other cases should handle NP, RELATIVE CLAUSE, VP, AND PREPOSITION_CLAUSE IN DIFFERENT ORDERS, WITH ANDS BETWEEN NOUN AND VERB PHRASES*/
    a(a(ADJ1)) --> adjective(ADJ1).
    a(a(ADJ2,AP)) --> adjective(ADJ2), a(AP).
@@ -13,10 +11,11 @@
    adverb_phrase(adverb_phrase(ADVERB1,ADVERB_PHRASE)) --> single_adverb(ADVERB1), adverb_phrase(ADVERB_PHRASE).
    single_adverb(single_adverb(SINGLE_ADVERB)) --> adv(SINGLE_ADVERB).
    %noun_phrases
-   noun_phrase(noun_phrase(NOUN_PHRASE)) --> noun_phrase_prep(NOUN_PHRASE).
-   noun_phrase(noun_phrase(NOUN_PHRASE,CONJ,NOUN_PHRASE_NP)) --> noun_phrase_prep(NOUN_PHRASE), conj(CONJ),noun_phrase(NOUN_PHRASE_NP).
-   noun_phrase_prep(noun_phrase_prep(NOUN_PHRASE_WITHOUT_PREP)) -->  np(NOUN_PHRASE_WITHOUT_PREP).
-   noun_phrase_prep(noun_phrase_prep(NOUN_PHRASE_PREP, PREPOSITIONAL_CLAUSE)) -->  np(NOUN_PHRASE_PREP), prep_clause(PREPOSITIONAL_CLAUSE).
+   noun_phrase(noun_phrase(NOUN_PHRASE)) --> sub_noun_phrase(NOUN_PHRASE).
+   noun_phrase(noun_phrase(NOUN_PHRASE,CONJ,NOUN_PHRASE_NP)) --> sub_noun_phrase(NOUN_PHRASE), conj(CONJ),noun_phrase(NOUN_PHRASE_NP).
+   sub_noun_phrase(sub_noun_phrase(NOUN_PHRASE_WITHOUT_PREP)) -->  np(NOUN_PHRASE_WITHOUT_PREP).
+   sub_noun_phrase(sub_noun_phrase(NOUN_PHRASE_PREP, PREPOSITIONAL_CLAUSE)) -->  np(NOUN_PHRASE_PREP), prep_clause(PREPOSITIONAL_CLAUSE).
+   sub_noun_phrase(sub_noun_phrase(NOUN_PHRASE_PREP, RELATIVE_CLAUSE)) -->  np(NOUN_PHRASE_PREP), relative_clause(RELATIVE_CLAUSE).
    np(np(DET,N))  -->  det(DET),n(N).
    np(np(DET,AP,N))  -->  det(DET),a(AP),n(N).
    np(np(AP,N))  --> a(AP),n(N).
