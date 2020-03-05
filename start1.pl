@@ -27,8 +27,10 @@
    verb_phrase_prep(verb_phrase_prep(VERB_PHRASE)) -->  vp(VERB_PHRASE).
    verb_phrase_prep(verb_phrase_prep(VERB_PHRASE, PREPOSITIONAL_CLAUSE)) -->  vp(VERB_PHRASE), prep_clause(PREPOSITIONAL_CLAUSE).
    vp(vp(V,NP))  -->  v(V),noun_phrase(NP).
+   vp(vp(V,NP,NP2))  -->  v(V),noun_phrase(NP),noun_phrase(NP2).
    vp(vp(V))  -->  v(V).
    vp(vp(ADV,V,NP))  --> adverb_phrase(ADV),v(V),noun_phrase(NP).
+   vp(vp(ADV,V,NP,NP2))  -->  adverb_phrase(ADV),v(V),noun_phrase(NP),noun_phrase(NP2).
    vp(vp(ADV,V))  --> adverb_phrase(ADV),v(V).
    %preposition_phrases
    prep_clause(prep_clause(PREP_PHRASE)) --> prep_phrase(PREP_PHRASE).
