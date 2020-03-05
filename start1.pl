@@ -1,5 +1,6 @@
    s(s(SIMPLE_SENTENCE)) -->  sentence(SIMPLE_SENTENCE).
    s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> sentence(SIMPLE_SENTENCE),conj(CONJ),s(SENTENCE).
+   s(s(SIMPLE_SENTENCE,CONJ,SENTENCE)) --> sentence(SIMPLE_SENTENCE),conj2(CONJ),s(SENTENCE).
    sentence(sentence(NP,VP)) -->  noun_phrase(NP),verb_phrase(VP).
    sentence(sentence(NP,RC,VP)) -->  noun_phrase(NP),relative_clause(RC),verb_phrase(VP).
    sentence(sentence(NP,VP,RC)) -->  noun_phrase(NP),verb_phrase(VP),relative_clause(RC).
@@ -35,9 +36,7 @@
    prep_clause(prep_clause(PREP_PHRASE,PREP_CLAUSE)) --> prep_phrase(PREP_PHRASE),prep_clause(PREP_CLAUSE).
    prep_phrase(prep_phrase(PREPOSITION,NP)) --> prep(PREPOSITION),noun_phrase(NP).
    %relative_clases
-   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),verb_phrase(VP),prep_clause(PREP_CLAUSE).
-   relative_clause(relative_clause(RELATIVE_PRONOUN,VP,PREP_CLAUSE)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP),prep_clause(PREP_CLAUSE).
-   relative_clause(relative_clause(RELATIVE_PRONOUN,PRONOUN,VP)) --> rp(RELATIVE_PRONOUN), p(PRONOUN),verb_phrase(VP).
+   relative_clause(relative_clause(RELATIVE_PRONOUN,NP,VP)) --> rp2(RELATIVE_PRONOUN), noun_phrase(NP), verb_phrase(VP).
    relative_clause(relative_clause(RELATIVE_PRONOUN,VP)) --> rp(RELATIVE_PRONOUN),verb_phrase(VP).
   %determinants
    det(det(the))  -->  [the].
@@ -80,7 +79,7 @@
    p(p(he)) --> [he].
    %relative_pronouns
    rp(rp(who)) --> [who].
-   rp(rp(whom)) --> [whom].
+   rp2(rp2(whom)) --> [whom].
    %verbs
    v(v(worked))  -->  [worked].
    v(v(pushed))  -->  [pushed].
@@ -96,13 +95,13 @@
    v(v(solved))  -->  [solved].
    v(v(wrote))  -->  [wrote].
    v(v(played))  -->  [played].
-   v(v(was))  -->  [was].
+   v(v(laughed))  -->  [laughed].
    v(v(danced))  -->  [danced].
    v(v(drank))  -->  [drank].
    v(v(ate))  -->  [ate].
    v(v(traveled))  -->  [traveled].
    v(v(slept))  -->  [slept].
-   v(v(were)) --> [were].
+   v(v(jumped)) --> [jumped].
    %adjectives
    adj(adj(large)) --> [large].
    adj(adj(old)) --> [old].
@@ -149,5 +148,5 @@
    prep(prep(to)) --> [to].
    %conjunctions
    conj(conj(and))  -->  [and].
-   conj(conj(while))  -->  [while].
+   conj2(conj2(while))  -->  [while].
 /*You only need to handle conjunctions between noun phrases, verb phrases, and entire sentences.*/
